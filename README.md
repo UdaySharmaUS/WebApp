@@ -69,8 +69,3 @@ The primary objective of the project is to create a web application that allows 
 - The application was deployed on a local machine for testing purposes using Docker. For production environments, Kubernetes was used to deploy the app in a scalable and manageable way.
 - The CI/CD pipeline ensures that the Docker image is automatically built and pushed to DockerHub, making the deployment process streamlined and automated.
 
-### **6. Future Enhancements**
-
-- **Password Protection for PDFs**: Implement a feature to allow users to set passwords on the generated PDF files for additional security.
-- **Microservices Architecture**: Break the application into smaller microservices (e.g., separate services for file upload, conversion, and metadata extraction) to improve maintainability and scalability.
-- **User Authentication**: Add user login and registration functionalities for personalized access to the application.
