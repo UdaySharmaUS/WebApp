@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCX to PDF Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>DOCX to PDF Converter</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="file">Upload DOCX File:</label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Upload</button>
+        </form>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.onsubmit = async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            const responseDiv = document.getElementById('response');
+            if (data.error) {
+                responseDiv.innerHTML = `<p style="color: red;">${data.error}</p>`;
+            } else {
+                responseDiv.innerHTML = `
+                    <p>File uploaded successfully!</p>
+                    <p>PDF Filename: <a href="/download/${data.pdf_filename}" target="_blank">${data.pdf_filename}</a></p>
+                    <p>Metadata:</p>
+                    <pre>${JSON.stringify(data.metadata, null, 2)}</pre>
+                `;
+            }
+        };
+    </script>
+</body>
+</html>
